@@ -1,0 +1,21 @@
+.banner{
+    color:white;
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+header{
+    display: block;
+    unicode-bidi: isolate;
+}
+
+img{
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.banner img{
+    display: inline-block;
+    height: auto;
+    width: 150px;
+}
