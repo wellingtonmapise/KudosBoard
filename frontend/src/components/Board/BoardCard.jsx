@@ -1,4 +1,5 @@
 import "./BoardCard.css";
+import { getBoards, deleteBoards, } from "../../utils/data";
 
 const BoardCard = () => {
   return (

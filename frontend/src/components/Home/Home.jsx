@@ -8,13 +8,15 @@ import Search from "../Search/Search";
 const Home = () => {
   return (
     <>
+    <div className="home-page">
     <Header/>
     <Search/>
-    <Footer/>
     <Category/>
     <CreateBoard/>
     <BoardList/>
-    </>
+    </div>
+     <Footer/>
+     </>
   );
 };
 export default Home;
