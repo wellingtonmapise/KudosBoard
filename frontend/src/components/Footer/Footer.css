@@ -3,12 +3,13 @@
 .footer {
   background-color: teal;
   color:white;
-  margin-top: 800px;
-  opacity: 0.5;
-  padding: 20px;
-  position: absolute;
+  /* margin-top: 800px; */
+  /* opacity: 0.5; */
+  /* padding: 20px; */
+  /* position: fixed; */
   width: 100%;
-
+  display: block;
+  unicode-bidi: isolate;
 }
 
 
