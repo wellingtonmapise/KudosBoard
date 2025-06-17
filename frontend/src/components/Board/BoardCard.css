@@ -1,0 +1,50 @@
+.board-card{
+    background-color: rgb(252, 245, 245);
+    border: 20px;
+    border-color: black;
+    padding: 15px;
+    text-align: center;
+    transition: transform .3s ease-in-out;
+}
+
+.view-board{
+    background-color: #fafbfc;
+    border: 1px solid #1b1f2326;
+    box-shadow: 0 1px 0 #1b1f230a, inset 0 1px 0 #ffffff40;
+    color: #24292e;
+    padding: 6px 16px;
+    transition: background-color .2s cubic-bezier(.3,0,.5,1);
+    border-radius: 6px;
+}
+
+.delete-btn{
+    background-color: teal;
+    border: 1px solid teal;
+    color: #fff;
+    margin-left: 10px;
+    text-decoration: none;
+    transition-duration: .1s;
+        word-wrap: break-word;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    height: auto;
+    line-height: 20px;
+    list-style: none;
+    padding: 7px;
+    position: relative;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: auto;
+}
+
+.board-card img{
+    width: 200px;
+    height : 300px;
+}
