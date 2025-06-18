@@ -1,14 +1,15 @@
 import "./BoardCard.css";
-import { getBoards, deleteBoards, } from "../../utils/data";
+import {Link} from "react-router-dom";
 
-const BoardCard = () => {
+
+const BoardCard = ({board, onDelete}) => {
   return (
     <div className="board-card">
-        <img src="https://picsum.photos/200" alt="board image"/>
-        <h3>Wellington</h3>
-        <p>Celebration</p>
-        <a className="view-board" href="/">View Board</a>
-        <button className="delete-btn">Delete Board</button>
+        <img src={board.gif} alt="board image"/>
+        <h3>{board.title}</h3>
+        <p>{board.category}</p>
+        <Link className="view-board" to={`/boards/${board.id}`}>View Board</Link>
+        <button className="delete-btn" onClick={() => onDelete(board.id)}>Delete Board</button>
     </div>
   );
 };
