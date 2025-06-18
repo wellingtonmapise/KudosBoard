@@ -1,15 +1,18 @@
 const BASE_URL = 'http://localhost:3000';
 
 //getting all the boards
-export async function getBoards() {
-  const url = `${BASE_URL}/boards`;
+export async function getBoards(search = '') {
+  const url = new URL (`${BASE_URL}/boards`);
+
+  if (search) {
+    url.searchParams.append('search', search);
+  }
   try {
-    const response = await fetch(url);
+    const response = await fetch(url.toString());
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-    const json = await response.json();
-    console.log(json);
+    return await response.json();
   } catch (error) {
     console.error(error.message);
   }
@@ -37,9 +40,9 @@ export async function postBoards(data) {
   }
 }
 
-//delete boards and its cards
-export async function deleteBoards() {
-  const url = `${BASE_URL}/boards/:id`;
+//delete board and its cards
+export async function deleteBoards(id) {
+  const url = `${BASE_URL}/boards/${id}`;
   try {
     const response = await fetch(url, {
     method: "DELETE",
@@ -127,4 +130,3 @@ export async function upvoteCards() {
     console.error(error.message);
   }
 }
-
