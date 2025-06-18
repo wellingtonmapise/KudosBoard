@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Search from "../Search/Search";
 import { useState, useEffect } from "react";
-import { getBoards} from "../../utils/data";
+import { getBoards,postBoards} from "../../utils/data";
 
 
 const Home = () => {
@@ -15,6 +15,16 @@ const Home = () => {
   const handleClearSearch = (value) => { setSearch('') };
   const handleSearchChange = (value) => { setSearch(value) };
   const handleCategoryChange = (value) => { setCategory(value) };
+  const handleCreateBoard = async (newBoardData) => {
+    try {
+      await postBoards(newBoardData);
+      const updatedBoards = await getBoards(search, category);
+      setBoards(updatedBoards);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 
 
     const [boards, setBoards] = useState([]);
@@ -36,7 +46,7 @@ const Home = () => {
     onClear={handleClearSearch}
     />
     <Category onCategoryChange={handleCategoryChange}/>
-    <CreateBoard/>
+    <CreateBoard onCreate={handleCreateBoard}/>
     <BoardList boards ={boards} setBoards={setBoards}/>
     </div>
      <Footer/>
