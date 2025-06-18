@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require('./generated/prisma');
 require('dotenv').config();
 
 const app = express();
@@ -48,19 +48,28 @@ app.get('/boards', async (req, res) => {
 //route for creating a new board
 
 app.post('/boards', async (req, res) => {
-    const { title, description, category, gif, author } = req.body;
-    if (!title || !description || !category || !gif) {
+    const { title, category, author } = req.body;
+    const defaultGif = 'https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MmtncTF3MHVraTNreDNpaXZsZnRhbHVsdmx0bzRzMjFjOGs0d2d4ZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/i7NLlLUaaG9u8/giphy.gif'
+    if (!title || !category) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
     try {
+
+        // console.log(title,category,author);
         const newBoard = await prisma.board.create({
-            data: { title, description, category, gif, author }
+            data: { 
+                title, 
+                category, 
+                gif: defaultGif, 
+                author },
         });
+        console.log('new board here',newBoard)
         res.status(201).json(newBoard);
 
     }
     catch (error) {
+        console.error('Error creating board:', error);
         res.status(500).json({ error: 'Could not create board' });
 
     }
