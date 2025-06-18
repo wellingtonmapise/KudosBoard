@@ -4,12 +4,28 @@ import CreateBoard from "../CreateBoard/CreateBoard";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Search from "../Search/Search";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getBoards} from "../../utils/data";
+
 
 const Home = () => {
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+
   const handleClearSearch = (value) => { setSearch('') };
   const handleSearchChange = (value) => { setSearch(value) };
+  const handleCategoryChange = (value) => { setCategory(value) };
+
+
+    const [boards, setBoards] = useState([]);
+
+    useEffect(() => {
+      getBoards(search,category)
+        .then((data) => {
+          setBoards(data);
+        })
+        .catch(console.error);
+    }, [search, category]);
 
   return (
     <>
@@ -19,9 +35,9 @@ const Home = () => {
     onSearchChange={handleSearchChange}
     onClear={handleClearSearch}
     />
-    <Category/>
+    <Category onCategoryChange={handleCategoryChange}/>
     <CreateBoard/>
-    <BoardList search={search}/>
+    <BoardList boards ={boards} setBoards={setBoards}/>
     </div>
      <Footer/>
      </>
