@@ -10,61 +10,77 @@ const prisma = new PrismaClient();
 app.use(cors()); //allows frontend-backend interaction
 app.use(express.json());
 
-const PORT =process.env.PORT || 3000;
-app.listen(PORT,() => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 })
 
 
 //route for getting all boards
-
-app.get('/boards', async(req,res) =>{
-    try{
-        const boards = await prisma.board.findMany({include: {cards: true}});
+app.get('/boards', async (req, res) => {
+    const { search, category } = req.query;
+    try {
+        const boards = await prisma.board.findMany({
+            where: {
+            AND: [
+                search ? {
+                    title:
+                    { contains: search,
+                    mode: 'insensitive',
+                 },
+                }
+                 : {},
+                category && category !== 'Recent' ? {category} : {},
+            ],
+        },
+        orderBy: category === 'Recent' ? {createdAt: 'desc'} : undefined,
+        take: category === 'Recent' ? 6 : undefined,
+            include: { cards: true }
+        });
         res.json(boards);
     }
-    catch (error){
-        res.status(500).json({error: 'Failed to fetch boards'})
+    catch (error) {
+        res.status(500).json({ error: 'Failed to fetch boards' })
     }
 });
 
 
 //route for creating a new board
 
-app.post('/boards', async(req, res) =>{
-    const {title, description, category, gif, author} = req.body;
-    if (!title || !description || !category || !gif){
-        return res.status(400).json({error: 'Missing required fields'});
+app.post('/boards', async (req, res) => {
+    const { title, description, category, gif, author } = req.body;
+    if (!title || !description || !category || !gif) {
+        return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    try{
+    try {
         const newBoard = await prisma.board.create({
-            data: {title, description,category,gif, author }
+            data: { title, description, category, gif, author }
         });
         res.status(201).json(newBoard);
 
     }
     catch (error) {
-        res.status(500).json({error: 'Could not create board'});
+        res.status(500).json({ error: 'Could not create board' });
 
     }
 });
 
 
 //delete boards and its cards
-
 app.delete('/boards/:id', async (req, res) => {
+    console.log(req)
     const id = parseInt(req.params.id);
     try {
         await prisma.card.deleteMany({
             where: {
-                boardId: id 
+                boardId: id
             }
         });
-        const deletedBoard = await prisma.board.delete({
-            where: { id } 
+        await prisma.board.delete({
+            where: { id }
         });
-        res.json(deletedBoard);
+        res.status(200).json({ success: 'deleted data successfully' })
     } catch (error) {
         console.error('Error', error);
         res.status(500).json({ error: 'Failed to delete board' });
@@ -72,21 +88,23 @@ app.delete('/boards/:id', async (req, res) => {
 });
 
 //get all cards for a board
-app.get('/boards/:id/cards', async(req,res) =>{
+app.get('/boards/:id/cards', async (req, res) => {
     const id = parseInt(req.params.id);
     if (isNaN(id) || id <= 0) {
-    res.status(400).json({ error: 'Invalid board ID' });
-    return;
+        res.status(400).json({ error: 'Invalid board ID' });
+        return;
     }
-    try{
-        const cards = await prisma.card.findMany({where:{boardId : id,
-        },
-    });
+    try {
+        const cards = await prisma.card.findMany({
+            where: {
+                boardId: id,
+            },
+        });
         res.json(cards);
     }
-    catch (error){
-        console.error('error',error)
-        res.status(500).json({error: 'Failed to fetch cards'})
+    catch (error) {
+        console.error('error', error)
+        res.status(500).json({ error: 'Failed to fetch cards' })
     }
 });
 
@@ -146,17 +164,17 @@ app.delete('/cards/:id', async (req, res) => {
 });
 
 //upvote a card
-app.patch('/cards/:id/upvote', async (req,res) =>{
+app.patch('/cards/:id/upvote', async (req, res) => {
     const id = parseInt(req.params.id);
-    try{
+    try {
         const updated = await prisma.card.update({
-            where: {id},
-            data: {upvotes: {increment: 1}}
+            where: { id },
+            data: { upvotes: { increment: 1 } }
         });
         res.json(updated);
     }
-    catch (error){
+    catch (error) {
         // console.error('vote error', error);
-        res.status(500).json({error: 'Failed to upvote card'})
+        res.status(500).json({ error: 'Failed to upvote card' })
     }
 })

@@ -1,20 +1,9 @@
 import BoardCard from "./BoardCard";
 import "./BoardList.css";
-import { getBoards, deleteBoards, postBoards } from "../../utils/data";
-import { useState, useEffect } from "react";
+import {deleteBoards} from "../../utils/data";
 
-const BoardList = ({search}) => {
-  const [boards, setBoards] = useState([]);
-
-  useEffect(() => {
-    getBoards(search)
-      .then((data) => {
-        setBoards(data);
-      })
-      .catch(console.error);
-  }, [search]);
-
-  const handleDelete = async (id) => {
+const BoardList = ({boards,setBoards}) => {
+const handleDelete = async (id) => {
     try{
         await deleteBoards(id);
         setBoards(prev => prev.filter(board => board.id !== id));

@@ -7,7 +7,7 @@ async function main() {
       title: 'Board 1',
       description: 'This is the first board',
       category: 'Category A',
-      gif: 'https://example.com/gif1.gif',
+      gif: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHdpZjB1OHhmeXAyaDRseDR3MzY3dXZkMTEzdnlvejFwcjRjbWN2MiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ddZ2mYhxhh69wEpSVz/giphy.gif',
       author: 'Author 1',
       cards: {
         create: [
@@ -33,7 +33,7 @@ async function main() {
       title: 'Board 2',
       description: 'This is the second board',
       category: 'Category B',
-      gif: 'https://example.com/gif2.gif',
+      gif: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHdpZjB1OHhmeXAyaDRseDR3MzY3dXZkMTEzdnlvejFwcjRjbWN2MiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ddZ2mYhxhh69wEpSVz/giphy.gif',
       author: 'Author 2',
       cards: {
         create: [

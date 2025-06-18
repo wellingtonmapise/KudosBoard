@@ -1,14 +1,19 @@
 import "./Category.css";
 
-const Category = () => {
+const Category = ({  onCategoryChange}) => {
+  const categories = ["All", "Recent", "Celebration", "Thank You", "Inspiration"];
+
   return (
-     <div className="category-btns">
-    <button className="btn-common category-btn">All</button>
-    <button className="btn-common category-btn">Recent</button>
-    <button className="btn-common category-btn">Celebration</button>
-    <button className="btn-common category-btn">Thank You</button>
-    <button className="btn-common category-btn">Inspiration</button>
-</div>
+    <div className="category-btns">
+      {categories.map((category) => (
+        <button
+          key={category}
+          className="category-btn category-btn"
+          onClick={() => onCategoryChange(category === "All" ? '' : category)}
+        >
+          {category}
+        </button>))}
+    </div>
   );
 };
 
