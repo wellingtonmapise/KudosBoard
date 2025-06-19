@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 const prisma = new PrismaClient();
 
-app.use(cors()); 
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
@@ -181,4 +181,27 @@ app.patch('/cards/:id/upvote', async (req, res) => {
     catch (error) {
         res.status(500).json({ error: 'Failed to upvote card' })
     }
+})
+
+//route for pinned
+app.put('/cards/:id/pinned', async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        const cardExists = await prisma.card.findUnique({
+            where: { id } });
+
+        if (!cardExists) {
+            return res.status(404).json({ error: 'Card not found' });
+        }
+
+        const updated = await prisma.card.update({
+            where: { id },
+            data: { pinned: !cardExists.pinned}
+        });
+        res.json(updated);}
+
+        catch (error) {
+            console.error('error', error)
+            res.status(500).json({ error: 'Failed to pin card' });
+        }
 })
