@@ -1,4 +1,4 @@
-.search{
+.search {
     align-items: center;
     display: flex;
     gap: 10px;
@@ -6,7 +6,7 @@
     max-width: 600px;
 }
 
-.search input{
+.search input {
     background-color: #fafbfc;
     border: 1px solid #1b1f2326;
     border-radius: 4px;
@@ -19,7 +19,8 @@
     padding: 10px;
 }
 
-.clear-btn, .search-btn {
+.clear-btn,
+.search-btn {
     align-items: center;
     background-color: teal;
     border: none;
@@ -34,7 +35,6 @@
     justify-content: center;
     line-height: 1;
     padding: 0 16px;
-    transition: background-color .3s ease, transform .2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     white-space: nowrap;
 }
-

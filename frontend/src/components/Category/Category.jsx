@@ -1,7 +1,13 @@
 import "./Category.css";
 
-const Category = ({  onCategoryChange}) => {
-  const categories = ["All", "Recent", "Celebration", "Thank You", "Inspiration"];
+const Category = ({ onCategoryChange }) => {
+  const categories = [
+    "All",
+    "Recent",
+    "Celebration",
+    "Thank You",
+    "Inspiration",
+  ];
 
   return (
     <div className="category-btns">
@@ -9,10 +15,11 @@ const Category = ({  onCategoryChange}) => {
         <button
           key={category}
           className="category-btn category-btn"
-          onClick={() => onCategoryChange(category === "All" ? '' : category)}
+          onClick={() => onCategoryChange(category === "All" ? "" : category)}
         >
           {category}
-        </button>))}
+        </button>
+      ))}
     </div>
   );
 };

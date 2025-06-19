@@ -6,8 +6,7 @@ require('dotenv').config();
 const app = express();
 const prisma = new PrismaClient();
 
-//middleware
-app.use(cors()); //allows frontend-backend interaction
+app.use(cors()); 
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
@@ -22,19 +21,20 @@ app.get('/boards', async (req, res) => {
     try {
         const boards = await prisma.board.findMany({
             where: {
-            AND: [
-                search ? {
-                    title:
-                    { contains: search,
-                    mode: 'insensitive',
-                 },
-                }
-                 : {},
-                category && category !== 'Recent' ? {category} : {},
-            ],
-        },
-        orderBy: category === 'Recent' ? {createdAt: 'desc'} : undefined,
-        take: category === 'Recent' ? 6 : undefined,
+                AND: [
+                    search ? {
+                        title:
+                        {
+                            contains: search,
+                            mode: 'insensitive',
+                        },
+                    }
+                        : {},
+                    category && category !== 'Recent' ? { category } : {},
+                ],
+            },
+            orderBy: category === 'Recent' ? { createdAt: 'desc' } : undefined,
+            take: category === 'Recent' ? 6 : undefined,
             include: { cards: true }
         });
         res.json(boards);
@@ -46,25 +46,23 @@ app.get('/boards', async (req, res) => {
 
 
 //route for creating a new board
-
 app.post('/boards', async (req, res) => {
     const { title, category, author } = req.body;
-    const defaultGif = 'https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MmtncTF3MHVraTNreDNpaXZsZnRhbHVsdmx0bzRzMjFjOGs0d2d4ZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/i7NLlLUaaG9u8/giphy.gif'
+    const defaultGif = 'https://picsum.photos/200/300?random=1'
     if (!title || !category) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
     try {
-
-        // console.log(title,category,author);
         const newBoard = await prisma.board.create({
-            data: { 
-                title, 
-                category, 
-                gif: defaultGif, 
-                author },
+            data: {
+                title,
+                category,
+                gif: defaultGif,
+                author
+            },
         });
-        console.log('new board here',newBoard)
+        console.log('new board here', newBoard)
         res.status(201).json(newBoard);
 
     }
@@ -119,7 +117,6 @@ app.get('/boards/:id/cards', async (req, res) => {
 
 
 //create a card for a board
-
 app.post('/boards/:id/cards', async (req, res) => {
     const { title, description, gif, author } = req.body;
     const boardId = parseInt(req.params.id);
@@ -138,14 +135,13 @@ app.post('/boards/:id/cards', async (req, res) => {
         });
         res.status(201).json(newCard);
     } catch (error) {
-        // console.error('card error', error);
+        console.error('card error', error);
         res.status(500).json({ error: 'Could not create card' });
     }
 });
 
 
 //delete card
-
 app.delete('/cards/:id', async (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -183,7 +179,6 @@ app.patch('/cards/:id/upvote', async (req, res) => {
         res.json(updated);
     }
     catch (error) {
-        // console.error('vote error', error);
         res.status(500).json({ error: 'Failed to upvote card' })
     }
 })
