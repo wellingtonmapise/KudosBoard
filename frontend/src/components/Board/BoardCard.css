@@ -6,6 +6,10 @@
     text-align: center;
     transition: transform .3s ease-in-out;
 }
+body.dark .board-card {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
 
 .view-board {
     background-color: #fafbfc;

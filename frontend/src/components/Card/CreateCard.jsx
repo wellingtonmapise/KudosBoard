@@ -19,6 +19,7 @@ const CreateCard = ({ onCreate }) => {
       })
       .catch(console.error);
   };
+  console.log(gifs);
   const handleInputChange = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
@@ -76,7 +77,7 @@ const CreateCard = ({ onCreate }) => {
               />
               {gifs.length > 0 && (
                 <div className="gif-container">
-                  {" "}
+
                   {gifs.map((gif) => (
                     <img
                       key={gif.id}
@@ -84,7 +85,7 @@ const CreateCard = ({ onCreate }) => {
                       alt="gif"
                       onClick={handleGifClick}
                     />
-                  ))}{" "}
+                  ))}
                 </div>
               )}
               <button className="search-btn" onClick={(e) => fetchGifs(e)}>
