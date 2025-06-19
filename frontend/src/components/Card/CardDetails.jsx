@@ -1,7 +1,27 @@
 import { upvoteCards } from "../../utils/data";
 import { useState } from "react";
-const cardDetails = ({ card, onDelete }) => {
+import { TiPinOutline } from "react-icons/ti";
+import { FaRegComment } from "react-icons/fa";
+import "./CardDetails.css";
+import { getPins } from "../../utils/data";
+
+
+
+const cardDetails = ({ card, onDelete, onUpdate }) => {
   const [upvotes, setUpvotes] = useState(card.upvotes);
+  const [isPinned, setIsPinned] = useState(card.pinned);
+
+  const handlePinClick = async () => {
+    try{
+      const updated = await getPins(card.id);
+      setIsPinned(updated.pinned);
+      onUpdate(updated)
+    }
+    catch(error){
+      console.error("Failed to pin/unpin", error)
+    }
+  }
+
 
   const handleUpvote = async (id) => {
     try {
@@ -14,7 +34,14 @@ const cardDetails = ({ card, onDelete }) => {
 
   return (
     <div className="board-card">
-      <img src={card.gif} alt="card-image" />
+      <div className="image-container">
+        <img src={card.gif} alt="card-image" />
+        <TiPinOutline
+          className={`pin-icon ${isPinned ? 'pinned' : 'unpinned'}`}
+          onClick={handlePinClick}
+        />
+
+      </div>
       <h3>{card.title}</h3>
       <p>{card.description}</p>
       <button className="view-board" onClick={() => handleUpvote(card.id)}>

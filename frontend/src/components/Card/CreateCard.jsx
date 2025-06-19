@@ -19,7 +19,6 @@ const CreateCard = ({ onCreate }) => {
       })
       .catch(console.error);
   };
-  console.log(gifs);
   const handleInputChange = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);

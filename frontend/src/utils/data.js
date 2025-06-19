@@ -144,3 +144,22 @@ export async function upvoteCards(cardId) {
     console.error(error.message);
   }
 }
+
+//change pins status
+export async function getPins(cardId) {
+  const url = `${BASE_URL}/cards/${cardId}/pinned`;
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+}

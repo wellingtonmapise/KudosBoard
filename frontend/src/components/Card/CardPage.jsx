@@ -29,6 +29,12 @@ const CardPage = () => {
     }
   };
 
+const handleCardUpdate = (newCards) =>{
+  setCards(prev => prev.map(card => { if(card.id === newCards.id) { return newCards } else { return card } }))
+}
+
+
+
   useEffect(() => {
     getCards(boardId)
       .then((data) => {
@@ -71,7 +77,7 @@ const CardPage = () => {
       <Header />
       <h2>{board.title}</h2>
       <CreateCard onCreate={handleCreateCard} />
-      <CardList onDelete={handleDelete} cards={cards} />
+      <CardList onDelete={handleDelete} cards={cards} onUpdate={handleCardUpdate}/>
       <Footer />
     </>
   );
