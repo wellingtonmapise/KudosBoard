@@ -5,16 +5,21 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Search from "../Search/Search";
 import { useState, useEffect } from "react";
-import { getBoards,postBoards} from "../../utils/data";
-
+import { getBoards, postBoards } from "../../utils/data";
 
 const Home = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
-  const handleClearSearch = (value) => { setSearch('') };
-  const handleSearchChange = (value) => { setSearch(value) };
-  const handleCategoryChange = (value) => { setCategory(value) };
+  const handleClearSearch = (value) => {
+    setSearch("");
+  };
+  const handleSearchChange = (value) => {
+    setSearch(value);
+  };
+  const handleCategoryChange = (value) => {
+    setCategory(value);
+  };
   const handleCreateBoard = async (newBoardData) => {
     try {
       await postBoards(newBoardData);
@@ -25,32 +30,30 @@ const Home = () => {
     }
   };
 
+  const [boards, setBoards] = useState([]);
 
-
-    const [boards, setBoards] = useState([]);
-
-    useEffect(() => {
-      getBoards(search,category)
-        .then((data) => {
-          setBoards(data);
-        })
-        .catch(console.error);
-    }, [search, category]);
+  useEffect(() => {
+    getBoards(search, category)
+      .then((data) => {
+        setBoards(data);
+      })
+      .catch(console.error);
+  }, [search, category]);
 
   return (
     <>
-    <div className="home-page">
-    <Header/>
-    <Search
-    onSearchChange={handleSearchChange}
-    onClear={handleClearSearch}
-    />
-    <Category onCategoryChange={handleCategoryChange}/>
-    <CreateBoard onCreate={handleCreateBoard}/>
-    <BoardList boards ={boards} setBoards={setBoards}/>
-    </div>
-     <Footer/>
-     </>
+      <div className="home-page">
+        <Header />
+        <Search
+          onSearchChange={handleSearchChange}
+          onClear={handleClearSearch}
+        />
+        <Category onCategoryChange={handleCategoryChange} />
+        <CreateBoard onCreate={handleCreateBoard} />
+        <BoardList boards={boards} setBoards={setBoards} />
+      </div>
+      <Footer />
+    </>
   );
 };
 export default Home;

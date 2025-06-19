@@ -1,4 +1,4 @@
-.board-card{
+.board-card {
     background-color: rgb(252, 245, 245);
     border: 20px;
     border-color: black;
@@ -7,24 +7,24 @@
     transition: transform .3s ease-in-out;
 }
 
-.view-board{
+.view-board {
     background-color: #fafbfc;
     border: 1px solid #1b1f2326;
     box-shadow: 0 1px 0 #1b1f230a, inset 0 1px 0 #ffffff40;
     color: #24292e;
     padding: 6px 16px;
-    transition: background-color .2s cubic-bezier(.3,0,.5,1);
+    transition: background-color .2s cubic-bezier(.3, 0, .5, 1);
     border-radius: 6px;
 }
 
-.delete-btn{
+.delete-btn {
     background-color: teal;
     border: 1px solid teal;
     color: #fff;
     margin-left: 10px;
     text-decoration: none;
     transition-duration: .1s;
-        word-wrap: break-word;
+    word-wrap: break-word;
     -webkit-appearance: none;
     appearance: none;
     border-radius: 6px;
@@ -44,7 +44,7 @@
     width: auto;
 }
 
-.board-card img{
+.board-card img {
     width: 200px;
-    height : 300px;
+    height: 300px;
 }

@@ -1,7 +1,7 @@
 import "./Search.css";
 import { useState } from "react";
 
-const Search = ({onSearchChange, onClear}) => {
+const Search = ({ onSearchChange, onClear }) => {
   const [input, setInput] = useState("");
 
   const handleSearchClick = () => {
@@ -15,24 +15,23 @@ const Search = ({onSearchChange, onClear}) => {
 
   return (
     <div className="search">
-    <input
-    type="text"
-    placeholder="Search boards ..."
-    value={input}
-    onChange={(e) => setInput(e.target.value)}
-    onKeyDown={(e) => {
-        if (e.key === 'Enter'){
+      <input
+        type="text"
+        placeholder="Search boards ..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
             handleSearchClick();
-        }
-    }}
-    />
-    <button className="search-btn" onClick={handleSearchClick}>
+          }
+        }}
+      />
+      <button className="search-btn" onClick={handleSearchClick}>
         Search
-    </button>
-    <button className="clear-btn" onClick={handleClearClick}>
+      </button>
+      <button className="clear-btn" onClick={handleClearClick}>
         Clear
-    </button>
-
+      </button>
     </div>
   );
 };

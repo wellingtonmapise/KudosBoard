@@ -1,20 +1,20 @@
-.banner{
-    color:white;
+.banner {
+    color: white;
     font-family: sans-serif;
     padding: 20px;
 }
 
-header{
+header {
     display: block;
     unicode-bidi: isolate;
 }
 
-img{
+img {
     overflow-clip-margin: content-box;
     overflow: clip;
 }
 
-.banner img{
+.banner img {
     display: inline-block;
     height: auto;
     width: 150px;
