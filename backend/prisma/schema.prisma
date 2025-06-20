@@ -36,4 +36,14 @@ model Card {
   pinned Boolean? @default(false)
   board Board @relation(fields: [boardId], references: [id])
   createdAt DateTime @default(now())
+  comments Comment[]
+}
+
+model Comment{
+  id Int @id @default(autoincrement())
+  body String
+  author String?
+  cardId Int
+  card Card @relation(fields: [cardId], references: [id])
+  createdAt DateTime @default(now())
 }

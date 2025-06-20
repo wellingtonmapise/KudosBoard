@@ -1,15 +1,20 @@
 import Header from "../Header/Header";
 import CreateCard from "./CreateCard";
 import CardList from "./CardList";
+import CardComments from "./CardComments";
 import { useParams } from "react-router-dom";
 import { getCards, getBoards, deleteCards, postCards } from "../../utils/data";
 import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
+import { IoArrowBackCircle } from "react-icons/io5";
+import "./CardPage.css";
 
 const CardPage = () => {
   const { id: boardId } = useParams();
   const [cards, setCards] = useState([]);
   const [boards, setBoards] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const handleDelete = async (id) => {
     try {
@@ -32,6 +37,16 @@ const CardPage = () => {
 const handleCardUpdate = (newCards) =>{
   setCards(prev => prev.map(card => { if(card.id === newCards.id) { return newCards } else { return card } }))
 }
+
+const handleOpenComments = (card) => {
+  setSelectedCard(card);
+  setShowModal(true);
+};
+
+const handleCloseComments = () => {
+  setShowModal(false);
+  setSelectedCard(null);
+};
 
 
 
@@ -73,12 +88,22 @@ const handleCardUpdate = (newCards) =>{
 
   return (
     <>
-      <a href={`/`}> Back </a>
-      <Header />
-      <h2>{board.title}</h2>
-      <CreateCard onCreate={handleCreateCard} />
-      <CardList onDelete={handleDelete} cards={cards} onUpdate={handleCardUpdate}/>
+    <div className="card-page-container">
+      <a href={`/`} className="back-btn"><IoArrowBackCircle /> </a>
+      <div className="card-page-content">
+        <Header />
+        <h2>{board.title}</h2>
+        <CreateCard onCreate={handleCreateCard} />
+        <CardList onDelete={handleDelete} cards={cards} onUpdate={handleCardUpdate} onOpenComments={handleOpenComments}/>
+      </div>
       <Footer />
+    </div>
+    {showModal && selectedCard && (
+      <CardComments
+        card={selectedCard}
+        onClose={handleCloseComments}
+      />
+    )}
     </>
   );
 };

@@ -151,7 +151,7 @@ export async function getPins(cardId) {
   try {
     const response = await fetch(url, {
       method: "PUT",
-      
+
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -161,5 +161,42 @@ export async function getPins(cardId) {
   } catch (error) {
     console.error(error.message);
     throw error;
+  }
+}
+
+//fetch comments for a card
+export async function getComments(cardId) {
+  const url = `${BASE_URL}/cards/${cardId}/comments`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      const json = await response.json();
+      return json;
+  }
+  catch (error) {
+    console.error(error.message);
+}
+}
+
+//post a comment for a card
+export async function postComments(data, cardId) {
+  const url = `${BASE_URL}/cards/${cardId}/comments`;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error.message);
   }
 }

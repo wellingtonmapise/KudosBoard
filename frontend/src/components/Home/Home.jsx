@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 import Search from "../Search/Search";
 import { useState, useEffect } from "react";
 import { getBoards, postBoards } from "../../utils/data";
+import "./Home.css";
 
 const Home = () => {
   const [search, setSearch] = useState("");
@@ -41,7 +42,7 @@ const Home = () => {
   }, [search, category]);
 
   return (
-    <>
+    <div className="home-wrapper">
       <div className="home-page">
         <Header />
         <Search
@@ -53,7 +54,7 @@ const Home = () => {
         <BoardList boards={boards} setBoards={setBoards} />
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 export default Home;

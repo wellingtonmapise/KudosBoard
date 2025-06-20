@@ -1,9 +1,10 @@
 .create-brd-btn {
-  background-color: #fafbfc;
-  border: 1px solid #1b1f2326;
+  background-color: var(--background);
+  border: 1px solid var(--border-color);
   box-shadow: 0 1px 0 #1b1f230a, inset 0 1px 0 #ffffff40;
-  color: #24292e;
+  color: var(--text-color);
   margin-top: 20px;
+  width: 100%;
 }
 
 .modal-overlay {
@@ -14,16 +15,22 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
   display: flex;
+  z-index: 999;
+  backdrop-filter: blur(2px);
   justify-content: center;
   align-items: center;
 }
 
 .modal {
-  background: white;
+  background: var(--background);
   padding: 2rem;
   border-radius: 10px;
+  border: 1px solid var(--border-color);
   position: relative;
-  width: 300px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  text-align: left;
 }
 
 .close-btn {
@@ -34,4 +41,33 @@
   background: none;
   font-size: 1.2rem;
   cursor: pointer;
+  color: var(--text-color);
+}
+
+.modal input, .modal select{
+  color: var(--text-color);
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.create-brd-btn:hover{
+  background-color:#006666;
+}
+
+
+.create-brd-main{
+  background-color: var(--background);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 0 #1b1f230a, inset 0 1px 0 #ffffff40;
+  color: var(--text-color);
+  margin-top: 20px;
+}
+
+.create-brd-main:hover{
+  background-color:#006666;
+  color: var(--text-color);
 }

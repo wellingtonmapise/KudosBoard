@@ -7,12 +7,12 @@
 }
 
 .search input {
-    background-color: #fafbfc;
-    border: 1px solid #1b1f2326;
+    background-color: var(--background);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     box-shadow: 0 1px 0 #1b1f230a, inset 0 1px 0 #ffffff40;
     box-sizing: border-box;
-    color: #24292e;
+    color: var(--text-color);
     flex: 1 1;
     font-size: 16px;
     height: 40px;
@@ -22,11 +22,11 @@
 .clear-btn,
 .search-btn {
     align-items: center;
-    background-color: teal;
-    border: none;
+    background-color: var(--background);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     box-sizing: border-box;
-    color: #fff;
+    color: var(--text-color);
     cursor: pointer;
     display: flex;
     flex: 0 1;

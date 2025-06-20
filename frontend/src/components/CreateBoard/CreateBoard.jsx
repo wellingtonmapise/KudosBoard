@@ -23,7 +23,7 @@ const CreateBoard = ({ onCreate }) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>+ Create Board</button>
+      <button onClick={() => setShowModal(true)} className="create-brd-main">+ Create Board</button>
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -31,19 +31,19 @@ const CreateBoard = ({ onCreate }) => {
               ✖
             </button>
             <h2>Create a New Board</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="board-form">
               <label>
                 Title:
                 <input
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                />
+                required/>
               </label>
               <label>
                 Category:
                 <select
                   value={category}
-                  onChange={(e) => setCategory(e.target.value)}
+                  onChange={(e) => setCategory(e.target.value)} required
                 >
                   <option value="">Select a category</option>
                   <option value="Thank You">Thank You</option>
@@ -58,7 +58,7 @@ const CreateBoard = ({ onCreate }) => {
                   onChange={(e) => setAuthor(e.target.value)}
                 />
               </label>
-              <button type="submit">Create Board</button>
+              <button type="submit" className="create-brd-btn">Create Board</button>
             </form>
           </div>
         </div>
