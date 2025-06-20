@@ -1,5 +1,6 @@
 import CardDetails from "./CardDetails";
-const CardList = ({ cards, onDelete,onUpdate }) => {
+import "./CardList.css";
+const CardList = ({ cards, onDelete, onUpdate, onOpenComments }) => {
 
     const sortPinned = [...cards].sort((a, b) => {
         if (a.pinned === b.pinned) {
@@ -9,12 +10,12 @@ const CardList = ({ cards, onDelete,onUpdate }) => {
   });
 
   return (
-    <>
+    <div className="card-list">
       {sortPinned.length > 0 &&
         sortPinned.map((card) => (
-          <CardDetails onDelete={onDelete} key={card.id} card={card} onUpdate={onUpdate} />
+          <CardDetails onDelete={onDelete} key={card.id} card={card} onUpdate={onUpdate} onOpenComments={onOpenComments} />
         ))}
-    </>
+    </div>
   );
 };
 

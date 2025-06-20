@@ -1,10 +1,11 @@
 
 
 .footer {
-  background-color: teal;
-  color:white;
-  width: 100%;
+  width: 100vw;
+  padding: 1rem;
+  text-align: center;
   display: block;
+  background-color: var(--background);
+  color: var(--text-color);
+  border-top: 2px solid rgba(21, 19, 19, 0.1);
 }
-
-

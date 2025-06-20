@@ -205,3 +205,52 @@ app.put('/cards/:id/pinned', async (req, res) => {
             res.status(500).json({ error: 'Failed to pin card' });
         }
 })
+
+//route for getting comments
+app.get('/cards/:id/comments', async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id) || id <= 0) {
+        res.status(400).json({ error: 'Invalid card ID' });
+        return;
+    }
+    try {
+        const comments = await prisma.comment.findMany({
+            where: {
+                cardId: id,
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+        res.json(comments);
+    } catch (error) {
+        console.error('error', error);
+        res.status(500).json({ error: 'Failed to fetch comments' });
+    }
+});
+
+//route for creating a comment
+
+app.post('/cards/:id/comments', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const { author, body } = req.body;
+    if (!body) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+    try {
+        const cardExists = await prisma.card.findUnique({
+            where: { id }
+        });
+        if (!cardExists) {
+            return res.status(404).json({ error: 'Card not found' });
+        }
+        const newComment = await prisma.comment.create({
+            data: { author, body, cardId: id }
+        });
+        res.status(201).json(newComment);
+        }
+        catch (error) {
+            console.error('error', error);
+            res.status(500).json({ error: 'Could not create comment' });
+        }
+    });

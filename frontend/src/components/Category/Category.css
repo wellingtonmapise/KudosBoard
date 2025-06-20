@@ -27,10 +27,10 @@
 }
 
 .category-btn {
-    background-color: #fafbfc;
-    border: 1px solid #1b1f2326;
+    background-color:var(--background-color);
+    border: 1px solid var(--border-color);
     box-shadow: 0 1px 0 #1b1f230a, inset 0 1px 0 #ffffff40;
-    color: #24292e;
+    color: var(--text-color);
     margin-left: 8px;
     padding: 6px 16px;
 

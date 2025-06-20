@@ -1,15 +1,16 @@
-import { upvoteCards } from "../../utils/data";
+import { upvoteCards, getPins } from "../../utils/data";
 import { useState } from "react";
 import { TiPinOutline } from "react-icons/ti";
 import { FaRegComment } from "react-icons/fa";
-import "./CardDetails.css";
-import { getPins } from "../../utils/data";
+import './CardDetails.css';
+import { BiSolidUpvote } from "react-icons/bi";
 
 
 
-const cardDetails = ({ card, onDelete, onUpdate }) => {
+const cardDetails = ({ card, onDelete, onUpdate, onOpenComments }) => {
   const [upvotes, setUpvotes] = useState(card.upvotes);
   const [isPinned, setIsPinned] = useState(card.pinned);
+
 
   const handlePinClick = async () => {
     try{
@@ -22,7 +23,6 @@ const cardDetails = ({ card, onDelete, onUpdate }) => {
     }
   }
 
-
   const handleUpvote = async (id) => {
     try {
       await upvoteCards(id);
@@ -33,7 +33,7 @@ const cardDetails = ({ card, onDelete, onUpdate }) => {
   };
 
   return (
-    <div className="board-card">
+    <div className="card-content">
       <div className="image-container">
         <img src={card.gif} alt="card-image" />
         <TiPinOutline
@@ -44,12 +44,16 @@ const cardDetails = ({ card, onDelete, onUpdate }) => {
       </div>
       <h3>{card.title}</h3>
       <p>{card.description}</p>
-      <button className="view-board" onClick={() => handleUpvote(card.id)}>
-        Upvote: {upvotes}
+      <div className="card-buttons">
+      <button className="up-vote" onClick={() => handleUpvote(card.id)}>
+      <BiSolidUpvote/> {upvotes}
       </button>
-      <button className="delete-btn" onClick={() => onDelete(card.id)}>
+      <button className="comment-btn" onClick={() => onOpenComments(card)}><FaRegComment /></button>
+      <button className="delete-btn-card" onClick={() => onDelete(card.id)}>
         Delete
       </button>
+      </div>
+
     </div>
   );
 };
