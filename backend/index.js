@@ -62,7 +62,6 @@ app.post('/boards', async (req, res) => {
                 author
             },
         });
-        console.log('new board here', newBoard)
         res.status(201).json(newBoard);
 
     }
@@ -76,9 +75,20 @@ app.post('/boards', async (req, res) => {
 
 //delete boards and its cards
 app.delete('/boards/:id', async (req, res) => {
-    console.log(req)
     const id = parseInt(req.params.id);
     try {
+        const cards = await prisma.card.findMany({
+            where: { boardId: id },
+            select: { id: true }
+        });
+        if (cards.length > 0) {
+            const cardIds = cards.map(card => card.id);
+            await prisma.comment.deleteMany({
+                where: {
+                    cardId: { in: cardIds }
+                }
+            });
+        }
         await prisma.card.deleteMany({
             where: {
                 boardId: id
@@ -87,6 +97,7 @@ app.delete('/boards/:id', async (req, res) => {
         await prisma.board.delete({
             where: { id }
         });
+
         res.status(200).json({ success: 'deleted data successfully' })
     } catch (error) {
         console.error('Error', error);
@@ -157,7 +168,9 @@ app.delete('/cards/:id', async (req, res) => {
         if (!cardExists) {
             return res.status(404).json({ error: 'Card not found' });
         }
-
+        await prisma.comment.deleteMany({
+            where: { cardId: id }
+        });
         const deletedCard = await prisma.card.delete({
             where: { id }
         });

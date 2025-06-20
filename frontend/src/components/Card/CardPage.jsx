@@ -68,7 +68,7 @@ const handleCloseComments = () => {
 
   const board = boards.find((board) => board.id === parseInt(boardId));
 
-  if (boards.length === 0) {
+  if (boards?.length === 0) {
     return (
       <>
         <Header />

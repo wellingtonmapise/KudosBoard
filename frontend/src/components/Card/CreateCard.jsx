@@ -74,7 +74,7 @@ const CreateCard = ({ onCreate }) => {
                 value={searchQuery}
                 onChange={handleInputChange}
               />
-              {gifs.length > 0 && (
+              {gifs?.length > 0 && (
                 <div className="gif-container">
 
                   {gifs.map((gif) => (

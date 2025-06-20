@@ -28,11 +28,12 @@ function App() {
       <button onClick={toggleTheme} className="toggle-btn">
         {darkMode ? (
           <>
-            Dark Mode: <MdDarkMode/>
+  Light Mode: <MdLightMode />
           </>
         ) : (
           <>
-            Light Mode: <MdLightMode />
+          Dark Mode: <MdDarkMode/>
+
           </>
         )}
       </button>

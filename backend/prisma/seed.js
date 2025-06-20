@@ -91,8 +91,6 @@ async function main() {
       },
     },
   });
-
-  console.log({ board1, board2 });
 }
 
 main()

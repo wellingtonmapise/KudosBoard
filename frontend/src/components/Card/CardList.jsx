@@ -11,10 +11,13 @@ const CardList = ({ cards, onDelete, onUpdate, onOpenComments }) => {
 
   return (
     <div className="card-list">
-      {sortPinned.length > 0 &&
+      {(sortPinned?.length > 0) ? (
         sortPinned.map((card) => (
           <CardDetails onDelete={onDelete} key={card.id} card={card} onUpdate={onUpdate} onOpenComments={onOpenComments} />
-        ))}
+        ))
+      ) : (
+        <p>No cards please create one!</p>
+      )}
     </div>
   );
 };

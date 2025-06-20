@@ -1,6 +1,7 @@
 const BASE_URL = "http://localhost:3000";
 const apiKey = import.meta.env.VITE_APP_API_KEY;
 
+
 //fetching gifs
 export async function getGifs(searchQuery) {
   const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchQuery}&limit=25&offset=0&rating=g&lang=en`;
@@ -53,7 +54,6 @@ export async function postBoards(data) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
-    console.log(json);
   } catch (error) {
     console.error(error.message);
   }
@@ -70,7 +70,6 @@ export async function deleteBoards(id) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
-    console.log(json);
   } catch (error) {
     console.error(error.message);
   }
@@ -85,7 +84,6 @@ export async function getCards(boardId) {
       throw new Error(`Response status: ${response.status}`);
     }
     return await response.json();
-    console.log(json);
   } catch (error) {
     console.error(error.message);
   }
@@ -139,7 +137,6 @@ export async function upvoteCards(cardId) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
-    console.log(json);
   } catch (error) {
     console.error(error.message);
   }

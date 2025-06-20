@@ -16,9 +16,13 @@ const BoardList = ({ boards, setBoards }) => {
 
   return (
     <div className="board-cards">
-      {boards.map((board) => (
-        <BoardCard key={board.id} board={board} onDelete={handleDelete} />
-      ))}
+      {(boards?.length > 0) ? (
+        boards.map((board) => (
+          <BoardCard key={board.id} board={board} onDelete={handleDelete} />
+        ))
+      ) : (
+        <p>No boards available. Please create one!</p>
+      )}
     </div>
   );
 };
