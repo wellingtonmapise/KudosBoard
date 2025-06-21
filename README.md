@@ -1,5 +1,3 @@
-📝 `NOTE` Use this template to initialize the contents of a README.md file for your application. As you work on your assignment over the course of the week, update the required or stretch features lists to indicate which features you have completed by changing `[ ]` to `[x]`. (🚫 Remove this paragraph before submitting your assignment.)
-
 ## Unit Assignment: Kudos Board
 
 Submitted by: **Wellington Mapise**
@@ -139,7 +137,7 @@ Deployed Application (**required**): [Kudos Board Deployed Site](https://kudosbo
 
 `TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
 
-`ADD_EMBEDDED_CODE_HERE`
+[`ADD_EMBEDDED_CODE_HERE`](https://www.loom.com/share/2489b625f0ec4eaf89701ee07b252011)
 
 ### Reflection
 
