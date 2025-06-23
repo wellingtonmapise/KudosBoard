@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://kudosboard-uooq.onrender.com";
 const apiKey = import.meta.env.VITE_APP_API_KEY;
 
 
